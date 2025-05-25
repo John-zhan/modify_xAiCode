@@ -1,0 +1,16 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+
+        {
+            "name": "LLDB Debug (Clang)", // 修改为您喜欢的名称
+            "type": "lldb",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/modify_xAiCode.exe", // **重要:** 确保 MyProjectApp
+                                                              // 是您根 CMakeLists.txt 中 add_executable() 定义的目标名
+            "args": [],
+            "cwd": "${workspaceFolder}/build", // 或者您程序需要运行的工作目录，例如 ${workspaceFolder}
+            "preLaunchTask": "CMake: build (root project)" // 确保运行正确的构建任务
+        }
+    ]
+}

@@ -1,0 +1,64 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "CMake: configure (root project)",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "-S",
+                "${workspaceFolder}",         // CMake 源目录是项目根目录
+                "-B",
+                "${workspaceFolder}/build",   // 构建目录是根目录下的 build
+                "-DCMAKE_BUILD_TYPE=Debug"    // 配置为 Debug 模式
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}" // 命令在工作区根目录执行
+            },
+            "group": "build",
+            "detail": "Configure the root CMake project"
+        },
+        {
+            "label": "CMake: build (root project)",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "--build",
+                "${workspaceFolder}/build", // 指定构建目录
+                "--config",
+                "Debug"                   // 指定构建配置
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true // 将此设为默认构建任务 (Ctrl+Shift+B)
+            },
+            "dependsOn": [
+                "CMake: configure (root project)" // 确保在构建前先配置
+            ],
+            "problemMatcher": [
+                "$gcc" // 用于解析 GCC/Clang 的错误和警告
+            ],
+            "detail": "Build the root CMake project"
+        },
+        {
+            "label": "CMake: clean (root project)",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "--build",
+                "${workspaceFolder}/build",
+                "--target",
+                "clean"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "group": "build",
+            "problemMatcher": [],
+            "detail": "Clean the build directory for the root project"
+        }
+    ]
+}
